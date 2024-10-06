@@ -175,7 +175,7 @@ cython_debug/
 
 # Folders with results and data
 output/
-data/
+#data/
 
 # Ignoring build and distribution directories again (redundant but included for emphasis)
 dist/
