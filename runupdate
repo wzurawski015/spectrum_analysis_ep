@@ -1,0 +1,24 @@
+## Ten skrypt w formacie markdown opisuje wszystkie kroki od aktywacji wirtualnego środowiska, przez czyszczenie, instalowanie pakietów, ich aktualizację, po odświeżenie pliku `requirements.txt` oraz dezaktywację środowiska. Możesz go zapisać w pliku `.md` i używać jako dokumentacji dla procesu zarządzania wirtualnym środowiskiem.
+# Skrypt uruchamiania środowiska wirtualnego, czyszczenia i aktualizacji pakietów
+## 1. Aktywacja wirtualnego środowiska
+source venv/bin/activate
+## 2. Czyszczenie środowiska z pakietów
+## Wyeksportuj listę obecnie zainstalowanych pakietów:
+pip freeze > temp_packages.txt
+## Odinstaluj wszystkie pakiety:
+xargs pip uninstall -y < temp_packages.txt
+## Usuń plik tymczasowy:
+rm temp_packages.txt
+## 3. Instalacja pakietów z pliku requirements.txt
+pip install -r requirements.txt
+## 4. Aktualizacja pakietów do najnowszych wersji
+## Jeśli chcesz zaktualizować wszystkie zainstalowane pakiety do najnowszych wersji, użyj poniższej komendy:
+pip install --upgrade $(pip freeze | awk -F'[=]' '{print $1}')
+## Jeśli korzystasz z pip-tools i masz plik requirements.in, możesz użyć poniższych komend:
+mv requirements.txt requirements.in
+pip-compile --upgrade requirements.in
+## 5. Odświeżenie pliku requirements.txt
+pip freeze > requirements.txt
+## 6. Dezaktywacja środowiska
+deactivate
+
